@@ -10,8 +10,8 @@ export default {
 			case 'GET':
 				const url = new URL(request.url);
 				// Make sure you have the necessary query parameters.
-				const access_key_id = url.searchParams.get('key');
-				if (!access_key_id) {
+				const key = url.searchParams.get('key');
+				if (!key) {
 					return responseHTML('invalid key');
 				}
 				const timestamp = url.searchParams.get('timestamp');
@@ -22,7 +22,11 @@ export default {
 				if (!sign) {
 					return responseHTML('invalid sign');
 				}
+                const access_key_id = env.ACCESS_KEY_ID;
 				const access_key_secret = env.ACCESS_KEY_SECRET;
+                if (access_key_id != key) {
+                    return responseHTML('invalid key');
+                }
 				// 待签名数据
 				const arr = url.pathname.split('/');
                 const body = arr[arr.length - 1];
