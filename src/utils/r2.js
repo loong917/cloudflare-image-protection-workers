@@ -9,7 +9,7 @@ export async function generateSignedUrl(access_key_id, access_key_secret, body) 
 	// md5(keysecret+body+timestamp)
 	const dataToSigned = `${access_key_secret}${body}${timestamp}`;
 	const md5Data = createHash('md5').update(dataToSigned).digest('hex');
-	const verifiedData = Buffer.from(md5Data).toString('base64');
+	const verifiedData = Buffer.from(md5Data).toString('hex');
 	return `key=${access_key_id}&timestamp=${timestamp}&sign=${verifiedData}`
 }
 
@@ -22,7 +22,7 @@ export async function verifySignedUrl(access_key_secret, body, timestamp) {
 	// md5(keysecret+body+timestamp)
 	const dataToSigned = `${access_key_secret}${body}${assertedTimestamp}`;
 	const md5Data = createHash('md5').update(dataToSigned).digest('hex');
-	const verifiedData = Buffer.from(md5Data).toString('base64');
+	const verifiedData = Buffer.from(md5Data).toString('hex');
 	if (verifiedData != sign) {
 		return { code: 403, msg: 'invalid sign' };
 	}
