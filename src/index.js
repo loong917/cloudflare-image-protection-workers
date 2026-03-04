@@ -34,7 +34,7 @@ export default {
 				if (check.code != 1) {
 					return responseHTML(check.msg);
 				}
-				const object = await env.MY_BUCKET.get(key);
+				const object = await env.MY_BUCKET.get(body);
 				if (object === null) {
 					return responseHTML('Object Not Found', 404);
 				}
