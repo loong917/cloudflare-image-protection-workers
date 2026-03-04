@@ -24,7 +24,8 @@ export default {
 				}
 				const access_key_secret = env.ACCESS_KEY_SECRET;
 				// 待签名数据
-				const body = url.pathname.slice(1);
+				const arr = url.pathname.split('/');
+                const body = arr[arr.length - 1];
 				// 验证签名
 				const check = await verifySignedUrl(access_key_secret, body, timestamp);
 				if (!check) {
@@ -58,7 +59,7 @@ export default {
 						const access_key_secret = env.ACCESS_KEY_SECRET;
 						const signedUrl = await generateSignedUrl(access_key_id, access_key_secret, finalKey);
 						const result = {
-							data: `${BASE_URL}/${finalKey}?${signedUrl}`,
+							data: `${BASE_URL}/cdn/${finalKey}?${signedUrl}`,
 						};
 						return new Response(JSON.stringify(result, null, 2), {
 							headers: { 'Content-Type': 'application/json' },
