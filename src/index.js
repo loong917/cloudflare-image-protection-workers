@@ -27,7 +27,7 @@ export default {
 				const arr = url.pathname.split('/');
                 const body = arr[arr.length - 1];
 				// 验证签名
-				const check = await verifySignedUrl(access_key_secret, body, timestamp);
+				const check = await verifySignedUrl(access_key_secret, body, timestamp, sign);
 				if (!check) {
 					return responseHTML('verify sign failed');
 				}

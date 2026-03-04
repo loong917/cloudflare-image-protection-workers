@@ -13,7 +13,7 @@ export async function generateSignedUrl(access_key_id, access_key_secret, body) 
 	return `key=${access_key_id}&timestamp=${timestamp}&sign=${verifiedData}`
 }
 
-export async function verifySignedUrl(access_key_secret, body, timestamp) {
+export async function verifySignedUrl(access_key_secret, body, timestamp, sign) {
 	const assertedTimestamp = Number(timestamp);
 	// Signed requests expire after five minute. Note that this value should depend on your specific use case
 	if (Date.now() > assertedTimestamp + EXPIRY) {
