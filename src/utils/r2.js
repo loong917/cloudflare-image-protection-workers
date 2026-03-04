@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 // How long an token should be valid for, in seconds
 const EXPIRY = 10 * 1000;
 
