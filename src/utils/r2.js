@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 
 // How long an token should be valid for, in seconds
-const EXPIRY = 10 * 1000;
+const EXPIRY = 60 * 1000;
 
 export async function generateSignedUrl(access_key_id, access_key_secret, body) {
 	// timestamp
